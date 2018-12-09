@@ -41,4 +41,4 @@ webpack-dev-server
 
 ## License
 
-[![MIT license](https://github.com/gabrielecanepa/images/raw/master/gif/lightbulb-color.gif)](https://gabriele.canepa.io/mit)
+[![MIT license](https://raw.githubusercontent.com/gabrielecanepa/assets/master/badges/mit.png)](https://gabriele.canepa.io/mit)
