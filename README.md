@@ -7,7 +7,7 @@ git clone git@github.com:gabrielecanepa/webpack-init
 cd webpack-init
 ```
 
-Copy the script in your root folder and add the `webpack:init` alias:
+Copy the script in your root folder and add a `webpack:init` alias (make sure you have an `.aliases` file in your `$ROOT`):
 
 ```bash
 cp .webpack-init.sh ~
