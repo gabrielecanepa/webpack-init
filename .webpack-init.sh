@@ -12,7 +12,7 @@ yarn add --dev \
 webpack webpack-cli webpack-dev-server \
 @babel/core @babel/preset-env babel-loader \
 eslint eslint-config-airbnb-base eslint-plugin-import \
-css-loader mini-css-extract-plugin node-sass sass-loader style-loader \
+css-loader mini-css-extract-plugin node-sass sass-loader \
 stylelint stylelint-config-recommended-scss stylelint-scss
 
 echo "\e[1;44mDownloading assets and config files...\e[0m"
