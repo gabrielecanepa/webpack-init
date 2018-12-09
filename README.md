@@ -41,4 +41,4 @@ webpack-dev-server
 
 ## License
 
-[![MIT license](badge.svg)](https://gabriele.canepa.io/mit)
+[![MIT license](https://github.com/gabrielecanepa/assets/raw/master/badges/mit.svg?sanitize=true)](https://gabriele.canepa.io/mit)
