@@ -28,4 +28,4 @@ curl https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/master
 curl https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/master/index.html > index.html
 curl https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/master/webpack.config.js > webpack.config.js
 
-echo "\e[1;44m🎉 ${project_name} is ready to use! Launch the app with 'webpack-dev-server'\e[0m"
+echo "\e[1;44m🎉 ${project_name} is ready to use! Launch the app with \`webpack-dev-server\`\e[0m"
