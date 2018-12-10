@@ -25,9 +25,9 @@ spinner(){
   done
 }
 
-# Copy script in root if it doesn't exist
+# Copy script into root if it doesn't exist
 if [ ! -f ~/.webpack-init.sh ]; then
-  echo "Copying script to root folder..." | text_transform BBLUE
+  echo "Copying script into root folder..." | text_transform BBLUE
   spinner 2 0.1
   cp ./.webpack-init.sh ~
   echo "\r✔️  Done!"
@@ -37,14 +37,15 @@ fi
 ALIAS="alias webpack:init='zsh ~/.webpack-init.sh'"
 PROFILES=(aliases bash_profile bashrc profile zshrc)
 
-# Execute just if the alias is not already present
+# Execute just if the alias is not present
 if [[ ! $(alias webpack:init) ]]; then
   echo "Creating alias..." | text_transform BBLUE
   spinner 2 0.1
-  # Copy the alias in the first found profile
+  # Copy the alias in the first available profile
   for profile in $PROFILES; do
     if [ -f ~/.$profile ] && ! grep -q $ALIAS ~/.$profile; then
       echo $ALIAS >> ~/.$profile
+      . ~/.$profile # refreshes the profile
       printf "\r✔️  Alias successfully created in "
       print  " ~/.$profile!" | text_transform BOLD
       printf "You can launch a new webpack project with "
