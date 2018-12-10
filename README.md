@@ -1,22 +1,21 @@
 ## Usage
 
-Clone the repository on your computer:
+First clone the repository on your computer. You must have [Node.js](https://nodejs.org) (> v4) and [Yarn](https://yarnpkg.com/lang/en/docs/install) installed:
 
 ```bash
 git clone git@github.com:gabrielecanepa/webpack-init
 cd webpack-init
 ```
 
-Copy the script in your root folder and add a `webpack:init` alias (make sure you have an `.aliases` file in your `$ROOT`):
+Run the script just once - the executable will be automatically copied into your root folder and an alias will be generated:
 
 ```bash
-cp .webpack-init.sh ~
-echo "webpack:init='zsh ~/.webpack-init.sh'" >> ~/.aliases
+zsh .webpack-init.sh
 ```
 
-Your should now able to run `webpack:init` from any folder of your computer.
+Your should now be able to run `webpack:init` from any folder of your computer.
 
-The command initializes a new repository with a ready-to-use [webpack boilerplate](https://github.com/gabrielecanepa/webpack-boilerplate) including:
+The command initializes a new repository with a ready-to-use [webpack boilerplate](https://github.com/gabrielecanepa/webpack-boilerplate), including:
 
 -   [Yarn](https://yarnpkg.com)
 -   [webpack](https://webpack.js.org)
