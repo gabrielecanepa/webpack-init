@@ -13,7 +13,7 @@ Run the script just once - the executable will be automatically copied into your
 zsh .webpack-init.sh
 ```
 
-Your should now be able to run `webpack:init` from any folder of your computer.
+You should now be able to run `webpack:init` from any folder of your computer.
 
 The command initializes a new repository with a ready-to-use [webpack boilerplate](https://github.com/gabrielecanepa/webpack-boilerplate), including:
 
