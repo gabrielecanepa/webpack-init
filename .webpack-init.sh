@@ -47,7 +47,8 @@ if [[ ! $(alias webpack:init) ]]; then
       echo $ALIAS >> ~/.$profile
       source ~/.$profile # refreshes the profile
       printf "\r✔️  Alias successfully added to "
-      print  " ~/.$profile!" | text_transform BOLD
+      printf "~/.$profile" | text_transform BOLD
+      print  "!"
       printf "You can launch a new webpack project with "
       print  "webpack:init" | text_transform BGREEN
       exit
