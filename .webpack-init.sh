@@ -1,12 +1,12 @@
 # Text transform and spinner functions
 text_transform(){
-  BLUE="\033[0;34m"     # Blue
-  BBLUE="\033[1;34m"    # Blue bold
-  GREEN="\033[0;32m"    # Green
-  BGREEN="\033[1;32m"   # Green bold
+  BLUE="\033[0;34m"    # Blue
+  BBLUE="\033[1;34m"   # Blue bold
+  GREEN="\033[0;32m"   # Green
+  BGREEN="\033[1;32m"  # Green bold
 
-  BOLD="\033[1m"        # Bold
-  NORMAL="\033[m"       # Normal
+  BOLD="\033[1m"       # Bold
+  NORMAL="\033[m"      # Normal
 
   color=\$${1:-NORMAL}
 
@@ -38,7 +38,7 @@ ALIAS="alias webpack:init='zsh ~/.webpack-init.sh'"
 PROFILES=(aliases bash_profile bashrc profile zshrc)
 
 # Execute just if the alias is not present
-if [ ! -f $(alias webpack:init) ]; then
+if [ ! -z $(alias webpack:init) ]; then
   echo "Creating alias..." | text_transform BBLUE
   spinner 2 0.1
   # Copy the alias in the first available profile
