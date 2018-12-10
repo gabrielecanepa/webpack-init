@@ -25,16 +25,11 @@ spinner(){
   done
 }
 
-# Copy into root or update script
+# Copy script into root folder if it doesn't exist
 if [ ! -f ~/.webpack-init.sh ]; then
   echo "Copying script into root folder..." | text_transform BBLUE
   spinner 2 0.1
   cp ./.webpack-init.sh ~
-  echo "\r✔️  Done!"
-else
-  echo "Updating script..." | text_transform BBLUE
-  spinner 2 0.1
-  /bin/cp -rf .webpack-init.sh ~
   echo "\r✔️  Done!"
 fi
 
@@ -51,7 +46,7 @@ if [[ ! $(alias webpack:init) ]]; then
     if [ -f ~/.$profile ] && ! grep -q $ALIAS ~/.$profile; then
       echo $ALIAS >> ~/.$profile
       source ~/.$profile # refreshes the profile
-      printf "\r✔️  Alias successfully created in "
+      printf "\r✔️  Alias successfully added to "
       print  " ~/.$profile!" | text_transform BOLD
       printf "You can launch a new webpack project with "
       print  "webpack:init" | text_transform BGREEN
