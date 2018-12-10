@@ -1,6 +1,6 @@
 ## Usage
 
-First clone the repository on your computer. You must have [Node.js](https://nodejs.org) (> v4) and [Yarn](https://yarnpkg.com/lang/en/docs/install) installed:
+Clone the repository on your computer. You must have [Node.js](https://nodejs.org) (> v4) and [Yarn](https://yarnpkg.com/lang/en/docs/install) installed:
 
 ```bash
 git clone git@github.com:gabrielecanepa/webpack-init
