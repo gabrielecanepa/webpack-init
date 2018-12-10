@@ -46,7 +46,6 @@ if [ ! -z $(alias webpack:init) ]; then
     if [ -f ~/.$profile ] && ! grep -q $ALIAS ~/.$profile; then
       echo $ALIAS >> ~/.$profile
       source ~/.$profile                          # refresh the profile
-      alias webpack:init='zsh ~/.webpack-init.sh' # add alias for current session
       printf "\r✔️  Alias successfully added to "
       printf "~/.$profile" | text_transform BOLD
       print  "!"
