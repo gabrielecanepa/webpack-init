@@ -38,7 +38,7 @@ ALIAS="alias webpack:init='zsh ~/.webpack-init.sh'"
 PROFILES=(aliases bash_profile bashrc profile zshrc)
 
 # Execute just if the alias is not present
-if [[ ! $(alias webpack:init) ]]; then
+if [[ $(alias webpack:init) ]]; then
   echo "Creating alias..." | text_transform BBLUE
   spinner 2 0.1
   # Copy the alias in the first available profile
