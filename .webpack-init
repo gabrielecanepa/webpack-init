@@ -70,21 +70,21 @@ yarn init
 echo "Adding packages..." | text_transform BBLUE
 PACKAGES=(
   @babel/core
-  # @babel/preset-env
-  # babel-loader
-  # css-loader
-  # eslint
-  # eslint-config-airbnb-base
-  # eslint-plugin-import
-  # mini-css-extract-plugin
-  # node-sass
-  # sass-loader
-  # stylelint
-  # stylelint-config-recommended-scss
-  # stylelint-scss
-  # webpack
-  # webpack-cli
-  # webpack-dev-server
+  @babel/preset-env
+  babel-loader
+  css-loader
+  eslint
+  eslint-config-airbnb-base
+  eslint-plugin-import
+  mini-css-extract-plugin
+  node-sass
+  sass-loader
+  stylelint
+  stylelint-config-recommended-scss
+  stylelint-scss
+  webpack
+  webpack-cli
+  webpack-dev-server
 )
 yarn add --dev $PACKAGES
 
