@@ -91,3 +91,6 @@ curl https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/master
 
 echo "📦✨ ${project_name} is ready to use!" | text_transform BOLD
 echo "Launch the app with $(printf webpack-dev-server | text_transform BGREEN)"
+
+# Exit from subshell and store directory change
+exec zsh || exec bash
