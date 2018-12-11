@@ -15,36 +15,38 @@ text_transform(){
 
   echo -ne "${NORMAL}"
 }
+# Usage: `spinner $duration $speed`
 spinner(){
   sleep $1 & job=$!
   while kill -0 $job 2>/dev/null
     do for s in / - \\ \|
-      do printf "\r$s" | text_transform BBLUE
+      do printf "\r$s"
       sleep $2
     done
   done
 }
 
 # Copy script into root folder if it doesn't exist
-if [ ! -f ~/.webpack-init.sh ]; then
+if [ ! -f ~/.webpack-init ]; then
   echo "Copying script into root folder..." | text_transform BBLUE
-  spinner 2 0.1
-  cp ./.webpack-init.sh ~
+  spinner 2 0.1  | text_transform BBLUE
+  cp ./.webpack-init ~
   echo "\r✔️  Done!"
 fi
 
 # Set up alias and profiles
-ALIAS="alias webpack:init='zsh ~/.webpack-init.sh'"
+ALIAS="alias webpack:init"
+COMMAND="zsh"
 PROFILES=(aliases bash_profile bashrc profile zshrc)
 
 # Execute just if the alias is not present
-if [ ! -z $(alias webpack:init) ]; then
+if [ ! -z $ALIAS ]; then
   echo "Creating alias..." | text_transform BBLUE
-  spinner 2 0.1
+  spinner 2 0.1 | text_transform BBLUE
   # Copy the alias in the first available profile
   for profile in $PROFILES; do
     if [ -f ~/.$profile ] && ! grep -q $ALIAS ~/.$profile; then
-      echo $ALIAS >> ~/.$profile
+      echo "$ALIAS=$COMMAND" >> ~/.$profile
       source ~/.$profile                          # refresh the profile
       printf "\r✔️  Alias successfully added to "
       printf "~/.$profile" | text_transform BOLD

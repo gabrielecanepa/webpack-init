@@ -10,7 +10,7 @@ cd webpack-init
 Run the script just once - the executable will be automatically copied into your root folder and an alias will be generated:
 
 ```bash
-zsh .webpack-init.sh
+zsh .webpack-init
 ```
 
 You should now be able to run `webpack:init` from any folder of your computer.
