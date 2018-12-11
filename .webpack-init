@@ -57,40 +57,63 @@ for profile in $PROFILES; do
   fi
 done
 
-# Initialize a new project
-echo "Project name:" | text_transform BBLUE
-read project_name
-mkdir $project_name
-cd $project_name
+# Initialize new project
+PROJECT_NAME=$1
+mkdir "$PROJECT_NAME"
+cd $PROJECT_NAME
 
 # Install Yarn
-echo "Initializing Yarn for ${project_name}..." | text_transform BBLUE
+echo "Initializing Yarn for ${PROJECT_NAME}..." | text_transform BBLUE
 yarn init
 
 # Add packages
 echo "Adding packages..." | text_transform BBLUE
-yarn add --dev \
-webpack webpack-cli webpack-dev-server \
-@babel/core @babel/preset-env babel-loader \
-eslint eslint-config-airbnb-base eslint-plugin-import \
-css-loader mini-css-extract-plugin node-sass sass-loader \
-stylelint stylelint-config-recommended-scss stylelint-scss
+PACKAGES=(
+  @babel/core
+  # @babel/preset-env
+  # babel-loader
+  # css-loader
+  # eslint
+  # eslint-config-airbnb-base
+  # eslint-plugin-import
+  # mini-css-extract-plugin
+  # node-sass
+  # sass-loader
+  # stylelint
+  # stylelint-config-recommended-scss
+  # stylelint-scss
+  # webpack
+  # webpack-cli
+  # webpack-dev-server
+)
+yarn add --dev $PACKAGES
 
 # Download assets from https://github.com/gabrielecanepa/webpack-boilerplate
 echo "Downloading assets and config files..." | text_transform BBLUE
-mkdir javascripts && touch javascripts/index.js
-mkdir stylesheets && touch stylesheets/index.scss
-mkdir images
-curl https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/master/images/favicon.png > images/favicon.png
-curl https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/master/.babelrc > .babelrc
-curl https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/master/.eslintrc.json > .eslintrc.json
-curl https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/master/.gitignore > .gitignore
-curl https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/master/.stylelintrc > .stylelintrc
-curl https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/master/index.html > index.html
-curl https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/master/webpack.config.js > webpack.config.js
+ASSETS=(
+  images/favicon.png
+  javascripts/index.js
+  stylesheets/index.scss
+  .babelrc .eslintrc.json
+  .gitignore
+  .stylelintrc
+  index.html
+  webpack.config.js
+)
+BASE_URL="https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/master"
 
-echo "📦✨ ${project_name} is ready to use!" | text_transform BOLD
-echo "Launch the app with $(printf webpack-dev-server | text_transform BGREEN)"
+mkdir images javascripts stylesheets
+
+# spinner 2 0.1 | text_transform BBLUE
+for asset in $ASSETS; do
+  spinner 0.1 0.1 | text_transform BBLUE
+
+  curl $BASE_URL/$asset > $asset &>/dev/null
+done
+
+echo "\r✨  Done."
+printf "📦  ${PROJECT_NAME} is ready to use! " | text_transform BOLD
+print "Launch the app with $(printf webpack-dev-server | text_transform BGREEN)"
 
 # Exit from subshell and store directory change
 exec zsh || exec bash
