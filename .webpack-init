@@ -15,7 +15,7 @@ text_transform(){
 
   echo -ne "${NORMAL}"
 }
-spinner(){   # usage: `spinner $duration $speed`
+spinner(){   # Usage: `spinner $duration $speed`
   sleep $1 & job=$!
   while kill -0 $job 2>/dev/null
     do for s in / - \\ \|
@@ -51,18 +51,18 @@ for profile in $PROFILES; do
     echo "\r✔️  Alias successfully added to $(printf $PROFILE_PATH | text_transform BOLD)!"
     echo "Restart the terminal and launch a new project with $(printf $ALIAS | text_transform BGREEN)"
 
-    exit    # alias copied - exit and refresh terminal
+    exit    # Alias copied - exit and refresh terminal
   else
-    break   # alias already present - break and pass to next command
+    break   # Alias already present - break and pass to next command
   fi
 done
 
 # Initialize new project
-if [ $# -eq 0 ]; then
-  echo "Project name:" | text_transform BBLUE
-  read PROJECT_NAME
+if [ ! $# -eq 0 ]; then                         # Is there an argument?
+  PROJECT_NAME=$1                               # Yes - store as project name
 else
-  PROJECT_NAME=$1
+  echo "Project name:" | text_transform BBLUE   # No - ask for project name
+  read PROJECT_NAME
 fi
 mkdir "$PROJECT_NAME"
 cd $PROJECT_NAME
@@ -78,22 +78,22 @@ PACKAGES=(
   @babel/preset-env
   babel-loader
   css-loader
-  # eslint
-  # eslint-config-airbnb-base
-  # eslint-plugin-import
+  eslint
+  eslint-config-airbnb-base
+  eslint-plugin-import
   mini-css-extract-plugin
   node-sass
   sass-loader
-  # stylelint
-  # stylelint-config-recommended-scss
-  # stylelint-scss
+  stylelint
+  stylelint-config-recommended-scss
+  stylelint-scss
   webpack
   webpack-cli
   webpack-dev-server
 )
-SECONDS=0
+SECONDS=0   # Reset script timer
 
-spinner 0 0.1 | yarn add --dev $PACKAGES &>/dev/null
+yarn add --dev $PACKAGES &>/dev/null
 
 PACKAGES_TIME=$SECONDS
 echo "\r✨  Done in $PACKAGES_TIME.$(( $RANDOM % 98 + 1 ))s."
@@ -115,7 +115,6 @@ SECONDS=0
 
 mkdir images javascripts stylesheets && for asset in $ASSETS; do
   spinner 0.1 0.1 | text_transform BBLUE
-
   curl $BASE_URL/$asset > $asset &>/dev/null
 done
 
