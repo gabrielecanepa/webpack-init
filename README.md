@@ -7,15 +7,17 @@ git clone git@github.com:gabrielecanepa/webpack-init
 cd webpack-init
 ```
 
-Run the script just once - the executable will be automatically copied into your root folder and an alias will be generated:
+Run the script `.webpack-init` once. The executable will be automatically copied into your root folder and an alias will be set in your first available profile:
 
 ```bash
 zsh .webpack-init
 ```
 
-You should now be able to run `webpack:init` from any folder of your computer.
+![](https://github.com/gabrielecanepa/assets/raw/master/webpack-init/screen1.gif?sanitize=true)
 
-The command initializes a new repository with a ready-to-use [webpack boilerplate](https://github.com/gabrielecanepa/webpack-boilerplate), including:
+After restarting the terminal, you will be able to run `webpack:init` from any folder of your computer.
+
+The command initializes a new repository with a ready-to-use [webpack boilerplate](https://github.com/gabrielecanepa/webpack-boilerplate) including:
 
 -   [Yarn](https://yarnpkg.com)
 -   [webpack](https://webpack.js.org)
