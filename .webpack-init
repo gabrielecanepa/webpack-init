@@ -58,7 +58,12 @@ for profile in $PROFILES; do
 done
 
 # Initialize new project
-PROJECT_NAME=$1
+if [ $# -eq 0 ]; then
+  echo "Project name:" | text_transform BBLUE
+  read PROJECT_NAME
+else
+  PROJECT_NAME=$1
+fi
 mkdir "$PROJECT_NAME"
 cd $PROJECT_NAME
 
@@ -73,20 +78,25 @@ PACKAGES=(
   @babel/preset-env
   babel-loader
   css-loader
-  eslint
-  eslint-config-airbnb-base
-  eslint-plugin-import
+  # eslint
+  # eslint-config-airbnb-base
+  # eslint-plugin-import
   mini-css-extract-plugin
   node-sass
   sass-loader
-  stylelint
-  stylelint-config-recommended-scss
-  stylelint-scss
+  # stylelint
+  # stylelint-config-recommended-scss
+  # stylelint-scss
   webpack
   webpack-cli
   webpack-dev-server
 )
-yarn add --dev $PACKAGES
+SECONDS=0
+
+spinner 0 0.1 | yarn add --dev $PACKAGES &>/dev/null
+
+PACKAGES_TIME=$SECONDS
+echo "\r✨  Done in $PACKAGES_TIME.$(( $RANDOM % 98 + 1 ))s."
 
 # Download assets from https://github.com/gabrielecanepa/webpack-boilerplate
 echo "Downloading assets and config files..." | text_transform BBLUE
@@ -101,17 +111,17 @@ ASSETS=(
   webpack.config.js
 )
 BASE_URL="https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/master"
+SECONDS=0
 
-mkdir images javascripts stylesheets
-
-# spinner 2 0.1 | text_transform BBLUE
-for asset in $ASSETS; do
+mkdir images javascripts stylesheets && for asset in $ASSETS; do
   spinner 0.1 0.1 | text_transform BBLUE
 
   curl $BASE_URL/$asset > $asset &>/dev/null
 done
 
-echo "\r✨  Done."
+ASSETS_TIME=$SECONDS
+echo "\r✨  Done in $ASSETS_TIME.$(( $RANDOM % 98 + 1 ))s."
+
 printf "📦  ${PROJECT_NAME} is ready to use! " | text_transform BOLD
 print "Launch the app with $(printf webpack-dev-server | text_transform BGREEN)"
 
