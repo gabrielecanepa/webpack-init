@@ -15,12 +15,12 @@ text_transform(){
 
   echo -ne "${NORMAL}"
 }
-spinner(){   # Usage: `spinner $duration $speed`
-  sleep $1 & job=$!
-  while kill -0 $job 2>/dev/null
-    do for s in / - \\ \|
-      do printf "\r$s"
-      sleep $2
+spinner(){   # Usage: `$command & spinner $speed`
+  pid=$!
+  while kill -0 $pid 2>/dev/null
+    do for c in / - \\ \|
+      do printf "\r$c"
+      sleep $1
     done
   done
 }
@@ -28,9 +28,10 @@ spinner(){   # Usage: `spinner $duration $speed`
 # Copy script into root folder if not existing
 if [ ! -f ~/.webpack-init ]; then
   echo "Copying script into root folder..." | text_transform BBLUE
-  spinner 2 0.1  | text_transform BBLUE
+  sleep 2 & spinner 0.1  | text_transform BBLUE
+
   cp ./.webpack-init ~
-  echo "\r✔️  Done!"
+  echo "\r✔️  Script copied in $(printf ~ | text_transform BOLD)"
 fi
 
 # Set up alias and profiles
@@ -45,10 +46,10 @@ for profile in $PROFILES; do
 
   if ! grep $ALIAS_COMMAND=\"$COMMAND\" $PROFILE_PATH >/dev/null; then
     echo "Creating alias..." | text_transform BBLUE
-    spinner 2 0.1 | text_transform BBLUE
+    sleep 2 & spinner 0.1 | text_transform BBLUE
 
     echo $ALIAS_COMMAND=\"$COMMAND\" >> $PROFILE_PATH
-    echo "\r✔️  Alias successfully added to $(printf $PROFILE_PATH | text_transform BOLD)!"
+    echo "\r✔️  Alias added to $(printf $PROFILE_PATH | text_transform BOLD)"
     echo "Restart the terminal and launch a new project with $(printf $ALIAS | text_transform BGREEN)"
 
     exit    # Alias copied - exit and refresh terminal
@@ -93,7 +94,8 @@ PACKAGES=(
 )
 SECONDS=0   # Reset script timer
 
-yarn add --dev $PACKAGES &>/dev/null
+yarn add --dev $PACKAGES &>/dev/null &
+spinner 0.1 | text_transform BBLUE
 
 PACKAGES_TIME=$SECONDS
 echo "\r✨  Done in $PACKAGES_TIME.$(( $RANDOM % 98 + 1 ))s."
@@ -114,8 +116,8 @@ BASE_URL="https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/m
 SECONDS=0
 
 mkdir images javascripts stylesheets && for asset in $ASSETS; do
-  spinner 0.1 0.1 | text_transform BBLUE
-  curl $BASE_URL/$asset > $asset &>/dev/null
+  curl $BASE_URL/$asset > $asset &>/dev/null &
+  spinner 0.1 | text_transform BBLUE
 done
 
 ASSETS_TIME=$SECONDS
