@@ -13,7 +13,7 @@ Run the script `.webpack-init` once. The executable will be automatically copied
 zsh .webpack-init
 ```
 
-![](https://github.com/gabrielecanepa/assets/raw/master/webpack-init/screen1.gif?sanitize=true)
+<!-- ![](https://github.com/gabrielecanepa/assets/raw/master/webpack-init/screen1.gif?sanitize=true) -->
 
 After restarting the terminal, you will be able to run `webpack:init` from any folder of your computer.
 
