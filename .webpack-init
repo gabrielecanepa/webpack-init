@@ -79,15 +79,23 @@ PACKAGES=(
   @babel/preset-env
   babel-loader
   css-loader
+  dotenv-webpack
   eslint
   eslint-config-airbnb-base
   eslint-plugin-import
+  gh-pages
+  html-webpack-plugin
+  image-webpack-loader
   mini-css-extract-plugin
   node-sass
+  optimize-css-assets-webpack-plugin
   sass-loader
   stylelint
   stylelint-config-recommended-scss
   stylelint-scss
+  svg-url-loader
+  uglifyjs-webpack-plugin
+  url-loader
   webpack
   webpack-cli
   webpack-dev-server
@@ -106,7 +114,8 @@ ASSETS=(
   images/favicon.png
   javascripts/index.js
   stylesheets/index.scss
-  .babelrc .eslintrc.json
+  .babelrc
+  .eslintrc.json
   .gitignore
   .stylelintrc
   index.html
@@ -115,7 +124,7 @@ ASSETS=(
 BASE_URL="https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/master"
 SECONDS=0
 
-mkdir images javascripts stylesheets && for asset in $ASSETS; do
+mkdir images javascripts stylesheets && touch .env && for asset in $ASSETS; do
   curl $BASE_URL/$asset > $asset &>/dev/null &
   spinner 0.1 | text_transform BBLUE
 done
