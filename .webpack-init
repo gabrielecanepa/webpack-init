@@ -1,12 +1,12 @@
 # Text transform and spinner functions
-text_transform(){
-  BLUE="\033[0;34m"     # Blue
-  BBLUE="\033[1;34m"    # Blue bold
-  GREEN="\033[0;32m"    # Green
-  BGREEN="\033[1;32m"   # Green bold
+text_transform() {
+  BLUE="\033[0;34m"    # Blue
+  BBLUE="\033[1;34m"   # Blue bold
+  GREEN="\033[0;32m"   # Green
+  BGREEN="\033[1;32m"  # Green bold
 
-  BOLD="\033[1m"        # Bold
-  NORMAL="\033[m"       # Normal
+  BOLD="\033[1m"       # Bold
+  NORMAL="\033[m"      # Normal
 
   color=\$${1:-NORMAL}
 
@@ -15,9 +15,8 @@ text_transform(){
 
   echo -ne "${NORMAL}"
 }
-spinner(){   # Usage: `$command & spinner $speed`
-  pid=$!
-  while kill -0 $pid 2>/dev/null
+spinner() {  # Usage: `$command & spinner $speed`
+  while kill -0 $! 2>/dev/null
     do for c in / - \\ \|
       do printf "\r$c"
       sleep $1
@@ -52,17 +51,17 @@ for profile in $PROFILES; do
     echo "\r✔️  Alias added to $(printf $PROFILE_PATH | text_transform BOLD)"
     echo "Restart the terminal and launch a new project with $(printf $ALIAS | text_transform BGREEN)"
 
-    exit    # Alias copied - exit and refresh terminal
+    exit   # Alias copied - exit and refresh terminal
   else
-    break   # Alias already present - break and pass to next command
+    break  # Alias already present - break and pass to next command
   fi
 done
 
 # Initialize new project
-if [ ! $# -eq 0 ]; then                         # Is there an argument?
-  PROJECT_NAME=$1                               # Yes - store as project name
+if [ ! $# -eq 0 ]; then                        # Is there an argument?
+  PROJECT_NAME=$1                              # Yes - store as project name
 else
-  echo "Project name:" | text_transform BBLUE   # No - ask for project name
+  echo "Project name:" | text_transform BBLUE  # No - ask for project name
   read PROJECT_NAME
 fi
 mkdir "$PROJECT_NAME"
@@ -77,6 +76,7 @@ echo "Adding packages..." | text_transform BBLUE
 PACKAGES=(
   @babel/core
   @babel/preset-env
+  babel-eslint
   babel-loader
   css-loader
   dotenv-webpack
@@ -84,18 +84,14 @@ PACKAGES=(
   eslint-config-airbnb-base
   eslint-plugin-import
   gh-pages
+  html-loader
   html-webpack-plugin
-  image-webpack-loader
-  mini-css-extract-plugin
   node-sass
-  optimize-css-assets-webpack-plugin
   sass-loader
+  style-loader
   stylelint
   stylelint-config-recommended-scss
   stylelint-scss
-  svg-url-loader
-  uglifyjs-webpack-plugin
-  url-loader
   webpack
   webpack-cli
   webpack-dev-server
@@ -111,20 +107,22 @@ echo "\r✨  Done in $PACKAGES_TIME.$(( $RANDOM % 98 + 1 ))s."
 # Download assets from https://github.com/gabrielecanepa/webpack-boilerplate
 echo "Downloading assets and config files..." | text_transform BBLUE
 ASSETS=(
-  images/favicon.png
-  javascripts/index.js
-  stylesheets/index.scss
+  assets/images/favicon.png
+  assets/stylesheets/application.scss
+  src/components/.keep
+  src/index.js
+  templates/index.html
   .babelrc
   .eslintrc.json
   .gitignore
   .stylelintrc
-  index.html
+  package.json
   webpack.config.js
 )
 BASE_URL="https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/master"
 SECONDS=0
 
-mkdir images javascripts stylesheets && touch .env && for asset in $ASSETS; do
+mkdir assets assets/images assets/stylesheets src src/components templates && touch .env && for asset in $ASSETS; do
   curl $BASE_URL/$asset > $asset &>/dev/null &
   spinner 0.1 | text_transform BBLUE
 done
@@ -132,8 +130,18 @@ done
 ASSETS_TIME=$SECONDS
 echo "\r✨  Done in $ASSETS_TIME.$(( $RANDOM % 98 + 1 ))s."
 
-printf "📦  ${PROJECT_NAME} is ready to use! " | text_transform BOLD
-print "Launch the app with $(printf webpack-dev-server | text_transform BGREEN)"
+# Initialize git
+GIT_COMMANDS=(
+  "git init"
+  "git add ."
+  "git commit -m 'Initialize new repository with webpack-init'"
+)
 
-# Exit from subshell and store directory change
+for git_command in $GIT_COMMANDS; do eval $git_command &>/dev/null; done
+
+# Print success message
+echo "📦  $(printf $PROJECT_NAME | text_transform BOLD) is ready to use! "
+echo "Launch the app with $(printf webpack-dev-server | text_transform BGREEN)"
+
+# Exit subshell and store directory change
 exec zsh || exec bash
