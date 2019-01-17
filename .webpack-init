@@ -116,7 +116,6 @@ ASSETS=(
   .eslintrc.json
   .gitignore
   .stylelintrc
-  package.json
   webpack.config.js
 )
 BASE_URL="https://raw.githubusercontent.com/gabrielecanepa/webpack-boilerplate/master"
