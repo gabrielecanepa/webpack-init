@@ -28,7 +28,7 @@ The command initializes a new repository with a ready-to-use [webpack boilerplat
 
 ![](https://github.com/gabrielecanepa/assets/raw/master/webpack-init/screen2.gif?sanitize=true)
 
-> **NOTE**: The process in the picture has been speeded up for illustrative purposes
+> **NOTE**: The process in the picture has been accelerated for illustrative purposes
 
 Make sure you have `./node_modules/.bin` in your `$PATH`. This way you can run your server with:
 
