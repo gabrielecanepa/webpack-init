@@ -15,7 +15,7 @@ zsh .webpack-init
 
 ![](https://github.com/gabrielecanepa/assets/raw/master/webpack-init/screen1.gif?sanitize=true)
 
-After restarting the terminal, you will be able to run `webpack:init` from any folder of your computer.
+After restarting the terminal, you will be able to run `webpack:init` from any place of your computer.
 
 The command initializes a new repository with a ready-to-use [webpack boilerplate](https://github.com/gabrielecanepa/webpack-boilerplate) with the following configuration:
 
@@ -28,7 +28,7 @@ The command initializes a new repository with a ready-to-use [webpack boilerplat
 
 ![](https://github.com/gabrielecanepa/assets/raw/master/webpack-init/screen2.gif?sanitize=true)
 
-> **NOTE**: The process in the picture has been accelerated for illustrative purposes
+> **NOTE**: The process in the picture has been accelerated to take the screenshot
 
 Make sure you have `./node_modules/.bin` in your `$PATH`. This way you can run your server with:
 
@@ -40,7 +40,7 @@ webpack-dev-server
 
 ### Scripts
 
-To speed up your development, you can define specific scripts in your `package.json` and run them with the `yarn run` command. This are the ones used by the [webpack-boilerplate](https://github.com/gabrielecanepa/webpack-boilerplate/blob/master/package.json):
+To speed up your development, you can define specific scripts in your `package.json` and run them with the `yarn run` command. This are the ones used in the [webpack-boilerplate](https://github.com/gabrielecanepa/webpack-boilerplate/blob/master/package.json):
 
 ```json
 "scripts": {
