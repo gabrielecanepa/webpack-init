@@ -15,6 +15,7 @@ text_transform() {
 
   echo -ne "${NORMAL}"
 }
+
 spinner() {  # Usage: `$command & spinner $speed`
   while kill -0 $! 2>/dev/null
     do for c in / - \\ \|
@@ -24,20 +25,20 @@ spinner() {  # Usage: `$command & spinner $speed`
   done
 }
 
-# Copy script into root folder if not existing
+# Copy script into root folder (if not existing)
 if [ ! -f ~/.webpack-init ]; then
   echo "Copying script into root folder..." | text_transform BBLUE
   sleep 2 & spinner 0.1  | text_transform BBLUE
 
   cp ./.webpack-init ~
-  echo "\r✔️  Script copied in $(printf ~ | text_transform BOLD)"
+  echo "\r✔️  Script copied in $(echo ~ | text_transform BOLD)"
 fi
 
 # Set up alias and profiles
 ALIAS="webpack:init"
 ALIAS_COMMAND="alias $ALIAS"
 COMMAND="zsh ~/.webpack-init"
-PROFILES=(aliases bash_profile bashrc profile zshrc)
+PROFILES=(aliases alias zshrc zprofile bashrc bash_profile)
 
 # Create alias in first available profile if not already present
 for profile in $PROFILES; do
@@ -49,11 +50,11 @@ for profile in $PROFILES; do
 
     echo $ALIAS_COMMAND=\"$COMMAND\" >> $PROFILE_PATH
     echo "\r✔️  Alias added to $(printf $PROFILE_PATH | text_transform BOLD)"
-    echo "Restart the terminal and launch a new project with $(printf $ALIAS | text_transform BGREEN)"
+    echo "Launch a new project with $(printf $ALIAS | text_transform BGREEN)"
 
-    exit   # Alias copied - exit and refresh terminal
+    exec zsh || exec bash  # Alias copied - exit and reload zsh
   else
-    break  # Alias already present - break and pass to next command
+    break                  # Alias already present - break and pass to next command
   fi
 done
 
@@ -123,7 +124,7 @@ SECONDS=0
 
 mkdir assets assets/images assets/stylesheets src src/components templates
 touch .env README.md
-echo "Application generated with [webpack-init](https://github.com/gabrielecanepa/webpack-init), created by [Gabriele Canepa](https://github.com/gabrielecanepa)." > README.md
+echo "Application generated with [webpack-init](https://github.com/gabrielecanepa/webpack-init)." > README.md
 
 for asset in $ASSETS; do
   curl $BASE_URL/$asset > $asset &>/dev/null &
@@ -137,7 +138,7 @@ echo "\r✨  Done in $ASSETS_TIME.$(( $RANDOM % 98 + 1 ))s."
 GIT_COMMANDS=(
   "git init"
   "git add ."
-  "git commit -m 'Initialize new repository with webpack-init'"
+  "git commit -m 'Initialize new project with webpack-init'"
 )
 
 for git_command in $GIT_COMMANDS; do eval $git_command &>/dev/null; done
