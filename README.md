@@ -16,7 +16,7 @@ Run the `.webpack-init` script once. The executable will be copied into your roo
 sh .webpack-init
 ```
 
-![](https://github.com/gabrielecanepa/private/blob/main/repos/webpack-init/screen1.gif?raw=true)
+![](https://raw.githubusercontent.com/gabrielecanepa/private/main/repos/webpack-init/screen1.gif?token=GHSAT0AAAAAAB4WZUR4626FLTFLBOVWRJ3KY6ZI5RQ)
 
 After restarting the terminal, you will be able to run `webpack:init` from any place of your computer.
 
@@ -29,7 +29,7 @@ The command initializes a new repository with a ready-to-use [webpack boilerplat
 -   [Sass](http://sass-lang.com) with [stylelint](https://stylelint.io) and modules import to enjoy hot reloading
 -   [GitHub Pages](https://www.npmjs.com/package/gh-pages) for easy deployment
 
-![](https://github.com/gabrielecanepa/private/blob/main/repos/webpack-init/screen2.gif?raw=true)
+![](https://raw.githubusercontent.com/gabrielecanepa/private/main/repos/webpack-init/screen2.gif?token=GHSAT0AAAAAAB4WZUR5LN5GDLOKBCQDADEAY6ZI54A)
 
 Make sure you have `./node_modules/.bin` in your `$PATH`. This way you can run your server with:
 
@@ -37,7 +37,7 @@ Make sure you have `./node_modules/.bin` in your `$PATH`. This way you can run y
 webpack-dev-server
 ```
 
-![](https://github.com/gabrielecanepa/private/blob/main/repos/webpack-init/screen3.gif?raw=true)
+![](https://raw.githubusercontent.com/gabrielecanepa/private/main/repos/webpack-init/screen3.gif?token=GHSAT0AAAAAAB4WZUR42RAGIMTNZFSP7TAUY6ZI6GA)
 
 ### Scripts
 
